@@ -1,0 +1,158 @@
+<div class="container-fluid text-center row pb-3">
+  <h2 class="m-2">SIGN UP</h2>
+  <div class="col-3"></div>
+  <div class="col-6 border border-dark rounded-3">
+    <form class="m-4" [formGroup]="registrationForm" (ngSubmit)="addUser()">
+      <div class="form-group mb-3 row">
+        <div class="col-lg-5">
+          <label for="name" class="col-form-label">Name</label>
+        </div>
+        <div class="col-lg-7">
+          <input
+            type="text"
+            id="name"
+            [class.is-invalid]="name?.invalid && name?.touched"
+            class="form-control"
+            placeholder="Enter Full Name"
+            formControlName="name"
+          />
+        </div>
+        <div *ngIf="name?.invalid && name?.touched">
+          <small *ngIf="name?.hasError('required')" class="text-danger"
+            >Name is required</small
+          >
+          <small *ngIf="name?.hasError('pattern')" class="text-danger"
+            >Please enter a valid name</small
+          >
+        </div>
+      </div>
+
+      <div class="form-group mb-3 row">
+        <div class="col-lg-5">
+          <label for="username" class="col-form-label">Username</label>
+        </div>
+        <div class="col-lg-7">
+          <input
+            type="text"
+            id="username"
+            [class.is-invalid]="username?.invalid && username?.touched"
+            class="form-control"
+            placeholder="Choose your username"
+            formControlName="username"
+          />
+        </div>
+        <div *ngIf="username?.invalid && username?.touched">
+          <small *ngIf="username?.hasError('required')" class="text-danger"
+            >Username is required</small
+          >
+          <small *ngIf="username?.hasError('minlength')" class="text-danger"
+            >Username must be at least 3 characters</small
+          >
+          <small *ngIf="username?.hasError('pattern')" class="text-danger"
+            >Please enter a valid username</small
+          >
+        </div>
+      </div>
+
+      <div class="form-group mb-3 row">
+        <div class="col-lg-5">
+          <label for="email" class="col-form-label">Email</label>
+        </div>
+        <div class="col-lg-7">
+          <input
+            type="email"
+            id="email"
+            [class.is-invalid]="email?.invalid && email?.touched"
+            class="form-control"
+            placeholder="Enter your mail Id"
+            formControlName="email"
+          />
+        </div>
+        <div *ngIf="email?.invalid && email?.touched">
+          <small *ngIf="email?.hasError('required')" class="text-danger"
+            >Email is required</small
+          >
+          <small *ngIf="email?.hasError('pattern')" class="text-danger"
+            >Please enter a valid Mail id</small
+          >
+        </div>
+      </div>
+
+      <div class="form-group mb-3 row">
+        <div class="col-lg-5">
+          <label for="password" class="col-form-label">Password</label>
+        </div>
+        <div class="col-lg-7">
+          <input
+            type="text"
+            id="password"
+            [class.is-invalid]="password?.invalid && password?.touched"
+            class="form-control"
+            placeholder="Choose your Password"
+            formControlName="password"
+          />
+        </div>
+        <div *ngIf="password?.invalid && password?.touched">
+          <small *ngIf="password?.hasError('required')" class="text-danger"
+            >Password is required</small
+          >
+          <small *ngIf="password?.hasError('minlength')" class="text-danger"
+            >Password must be atleast 6 characters</small
+          >
+        </div>
+      </div>
+
+      <div class="form-group mb-3 row">
+        <div class="col-lg-5">
+          <label for="confirmPassword" class="col-form-label"
+            >Confirm Password</label
+          >
+        </div>
+        <div class="col-lg-7">
+          <input
+            type="password"
+            id="confirmPassword"
+            [class.is-invalid]="
+              confirmPassword?.invalid && confirmPassword?.touched
+            "
+            class="form-control"
+            placeholder="Choose your Password"
+            formControlName="confirmPassword"
+          />
+        </div>
+        <div *ngIf="confirmPassword?.invalid && confirmPassword?.touched">
+          <small
+            *ngIf="confirmPassword?.hasError('required')"
+            class="text-danger"
+            >Please confirm your password</small
+          >
+          <small
+            *ngIf="confirmPassword?.hasError('matchPasswords')"
+            class="text-danger"
+            >Passwords mismatched</small
+          >
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <span
+          >Already registered?
+          <a href="/login" class="text-decoration-none">LOGIN HERE</a>
+        </span>
+      </div>
+
+      <div class="mb-3 row">
+        <div class="col-md-12">
+          <button
+            type="submit"
+            [disabled]="registrationForm.invalid"
+            class="btn btn-dark"
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="col-6"></div>
+</div>
