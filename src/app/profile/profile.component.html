@@ -1,17 +1,82 @@
 <div class="container-fluid row text-center d-flex justify-content-center">
-  <div class="col-lg-6 my-4">
+  <div *ngIf="showData" class="col-lg-6 my-4">
     <h1>User Profile</h1>
-    <div class="row my-3">
-      <div class="col-6">Name</div>
-      <div class="col-6">{{ user.name }}</div>
+
+    <table class="table table-light table-bordered">
+      <tbody>
+        <tr>
+          <th>
+            <p class="m-0 form-control bg-disabled">
+              <strong>Name</strong>
+            </p>
+          </th>
+          <td>
+            <input
+              type="text"
+              class="form-control"
+              [disabled]="disableInput"
+              [(ngModel)]="newUser.name"
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <th>
+            <p class="m-0 form-control bg-disabled">
+              <strong>Username</strong>
+            </p>
+          </th>
+          <td>
+            <input
+              type="text"
+              class="form-control"
+              [disabled]="disableInput"
+              [(ngModel)]="newUser.username"
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <th>
+            <p class="m-0 form-control bg-disabled">
+              <strong>Email</strong>
+            </p>
+          </th>
+          <td>
+            <input
+              type="text"
+              class="form-control"
+              [disabled]="disableInput"
+              [(ngModel)]="newUser.email"
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="row">
+      <div class="col-6">
+        <button
+          class="btn btn-secondary"
+          *ngIf="showEnable"
+          (click)="enableButton()"
+        >
+          Update
+        </button>
+        <button
+          class="btn btn-primary"
+          *ngIf="!showEnable"
+          (click)="updateUser()"
+        >
+          Update
+        </button>
+      </div>
+      <div class="col-6">
+        <button class="btn btn-danger" (click)="deleteUser()">Delete</button>
+      </div>
     </div>
-    <div class="row my-3">
-      <div class="col-6">Username</div>
-      <div class="col-6">{{ user.username }}</div>
-    </div>
-    <div class="row my-3">
-      <div class="col-6">Email</div>
-      <div class="col-6">{{ user.email }}</div>
-    </div>
+    <!-- {{ newUser | json }} -->
+  </div>
+  <div *ngIf="!showData">
+    <app-page-not-found></app-page-not-found>
   </div>
 </div>

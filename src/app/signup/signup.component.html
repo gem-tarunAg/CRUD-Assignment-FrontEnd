@@ -12,6 +12,7 @@
             type="text"
             id="name"
             [class.is-invalid]="name?.invalid && name?.touched"
+            [class.is-valid]="name?.valid"
             class="form-control"
             placeholder="Enter Full Name"
             formControlName="name"
@@ -36,6 +37,7 @@
             type="text"
             id="username"
             [class.is-invalid]="username?.invalid && username?.touched"
+            [class.is-valid]="username?.valid"
             class="form-control"
             placeholder="Choose your username"
             formControlName="username"
@@ -63,6 +65,7 @@
             type="email"
             id="email"
             [class.is-invalid]="email?.invalid && email?.touched"
+            [class.is-valid]="email?.valid"
             class="form-control"
             placeholder="Enter your mail Id"
             formControlName="email"
@@ -84,9 +87,10 @@
         </div>
         <div class="col-lg-7">
           <input
-            type="text"
+            type="password"
             id="password"
             [class.is-invalid]="password?.invalid && password?.touched"
+            [class.is-valid]="password?.valid"
             class="form-control"
             placeholder="Choose your Password"
             formControlName="password"
@@ -115,6 +119,7 @@
             [class.is-invalid]="
               confirmPassword?.invalid && confirmPassword?.touched
             "
+            [class.is-valid]="confirmPassword?.valid"
             class="form-control"
             placeholder="Choose your Password"
             formControlName="confirmPassword"

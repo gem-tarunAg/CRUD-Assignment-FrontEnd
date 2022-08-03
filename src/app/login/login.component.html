@@ -1,8 +1,8 @@
 <div class="container-fluid text-center row p-2">
   <h2 class="m-2">SIGN IN</h2>
-  <div class="container-fluid col-lg-4 border border-dark p-3 rounded-3">
+  <div class="container-fluid col-md-6 border border-dark p-3 rounded-3">
     <form #signinForm="ngForm" (ngSubmit)="submitForm(signinForm)">
-      <div class="mb-3 row">
+      <div class="mb-3 mt-3 row">
         <div class="col-lg-4">
           <label for="username" class="col-form-label">Username</label>
         </div>
@@ -11,7 +11,8 @@
             type="text"
             #username="ngModel"
             pattern="^[a-zA-Z0-9]+([._]?[a-zA-Z0-9]+)*$"
-            [class.is-invalid]="signinForm.submitted && username.invalid"
+            [class.is-invalid]="username.touched && username.invalid"
+            [class.is-valid]="username.valid"
             required
             id="userName"
             class="form-control"
@@ -19,9 +20,7 @@
             [(ngModel)]="userDetails.username"
           />
 
-          <div
-            *ngIf="username.errors && signinForm.submitted && username.invalid"
-          >
+          <div *ngIf="username.errors && username.touched && username.invalid">
             <small class="text-danger" *ngIf="username.errors['required']"
               >Username is required</small
             >
@@ -40,7 +39,8 @@
           <input
             type="password"
             #password="ngModel"
-            [class.is-invalid]="signinForm.submitted && password.invalid"
+            [class.is-invalid]="password.touched && password.invalid"
+            [class.is-valid]="password.valid"
             required
             minlength="6"
             id="password"
@@ -49,9 +49,7 @@
             [(ngModel)]="userDetails.password"
           />
 
-          <div
-            *ngIf="password.errors && signinForm.submitted && password.invalid"
-          >
+          <div *ngIf="password.errors && username.touched && password.invalid">
             <small class="text-danger" *ngIf="password.errors['required']"
               >Password is required</small
             >
@@ -67,9 +65,15 @@
           <a href="/signup" class="text-decoration-none">REGISTER HERE</a>
         </span>
       </div>
-      <div class="mb-3 row">
+      <div class="row">
         <div class="col-lg-12 mb-2">
-          <button class="btn btn-dark" type="submit">Sign In</button>
+          <button
+            class="btn btn-dark"
+            [disabled]="password.invalid || username.invalid"
+            type="submit"
+          >
+            Sign In
+          </button>
         </div>
       </div>
     </form>

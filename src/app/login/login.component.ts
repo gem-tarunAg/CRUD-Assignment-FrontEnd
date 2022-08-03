@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
 
   submitForm(form: NgForm) {
     if (form.valid) {
-      console.log('val--', form.value);
+      // console.log('val--', form.value);
       var req = {
         method: 'POST',
         url: 'http://localhost:3000/api/login',
@@ -34,25 +34,34 @@ export class LoginComponent implements OnInit {
           'Content-Type': 'application/json',
         },
       };
-      console.log('data---', req.data);
+      // console.log('data---', req.data);
 
       this.http
         .post<any>(req.url, req.data, { headers: req.headers })
-        .subscribe((res) => {
-          console.log('res---', res);
-          // console.log('BOOL', res.data[0].boolean);
+        .subscribe(
+          (res) => {
+            //   console.log('res---', res);
+            //   console.log('BOOL--', res.data[0]);
+            //   console.log(res.data[0].boolean);
 
-          if (res.data[0].boolean) {
             Swal.fire({
               icon: 'success',
               title: 'Successfully Logged In!',
             });
             this.router.navigate([
               'profile',
-              { username: form.value.username },
+              { username: res.data[1].username },
             ]);
+          },
+          (err) => {
+            // console.log('ERROR--', err);
+            Swal.fire({
+              icon: 'warning',
+              title: 'Invalid Credentials',
+            });
+            form.resetForm();
           }
-        });
+        );
     }
   }
 }

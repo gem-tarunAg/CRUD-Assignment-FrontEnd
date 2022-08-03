@@ -87,14 +87,14 @@ export class SignupComponent implements OnInit {
 
   addUser() {
     if (this.registrationForm.valid) {
-      console.log(this.registrationForm.value);
+      // console.log(this.registrationForm.value);
       var data = {
         name: this.registrationForm.value.name,
         username: this.registrationForm.value.username,
         email: this.registrationForm.value.email,
         password: this.registrationForm.value.password,
       };
-      console.log(data);
+      // console.log(data);
       var req = {
         method: 'POST',
         url: 'http://localhost:3000/api/signup',
@@ -105,16 +105,26 @@ export class SignupComponent implements OnInit {
       };
       this.http
         .post<any>(req.url, req.data, { headers: req.headers })
-        .subscribe((res) => {
-          console.log('res--', res);
-          if (res.data[0].boolean) {
+        .subscribe(
+          (res) => {
+            // console.log('res--', res);
+            if (res.data[0].boolean) {
+              Swal.fire({
+                icon: 'success',
+                title: 'Successfully registered!',
+              });
+              this.router.navigate(['login']);
+            }
+          },
+          (err: any) => {
+            // console.log('ERROR---', err);
             Swal.fire({
-              icon: 'success',
-              title: 'Successfully registered!',
+              icon: 'warning',
+              title: 'Unable to Create an Account',
             });
-            this.router.navigate(['login']);
+            this.registrationForm.reset();
           }
-        });
+        );
     }
   }
 }
